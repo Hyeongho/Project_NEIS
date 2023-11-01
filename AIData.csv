@@ -1,0 +1,11 @@
+---,AttackPoint,ArmorPoint,HP,MP,MoveSpeed,AttackDistance,InteractionDistance
+Aurora,0,0,100,0,300,200,60000
+Grux,20,10,200,100,300,100,1000
+Scorch,0,0,0,0,0,0,0
+Rampage,50,20,1500,100,450,250,2000
+Grux_S,5,0,50,0,250,150,3000
+GruxHalloween_S,5,0,60,0,220,150,3000
+GruxWarChief_S,5,0,80,0,220,150,3000
+GruxQilin_S,5,0,200,0,200,200,3000
+IggyScorch_S,10,0,100,0,200,2000,3000
+NewRow_8,0,0,0,0,0,0,0
