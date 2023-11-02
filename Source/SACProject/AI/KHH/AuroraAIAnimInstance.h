@@ -72,7 +72,7 @@ public:
 	virtual void NativeBeginPlay();
 
 public:
-	void TestSkill(int Index);
+	void Skill(int Index);
 	void Attack();
 
 public:

@@ -89,15 +89,15 @@ void AAuroraTestController::Tick(float DeltaTime)
 
 void AAuroraTestController::Dass(const FInputActionValue& Value)
 {
-	m_Anim->TestSkill(0);
+	m_Anim->Skill(0);
 }
 
 void AAuroraTestController::Freeze(const FInputActionValue& Value)
 {
-	m_Anim->TestSkill(1);
+	m_Anim->Skill(1);
 }
 
 void AAuroraTestController::Ultimate(const FInputActionValue& Value)
 {
-	m_Anim->TestSkill(2);
+	m_Anim->Skill(2);
 }

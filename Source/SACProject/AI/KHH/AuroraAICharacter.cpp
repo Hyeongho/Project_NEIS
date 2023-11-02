@@ -142,8 +142,6 @@ void AAuroraAICharacter::Tick(float DeltaTime)
 		{
 			m_SkillCoolTime[i].CurCooltime += DeltaTime;
 
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("%f"), m_SkillCoolTime[i].CurCooltime));
-
 			if (m_SkillCoolTime[i].CurCooltime >= m_SkillCoolTime[i].MaxCooltime)
 			{
 				m_SkillCoolTime[i].IsCool = false;
@@ -218,19 +216,12 @@ void AAuroraAICharacter::PlaySkill(int Index)
 {
 	UAuroraAIAnimInstance* Anim = Cast<UAuroraAIAnimInstance>(GetMesh()->GetAnimInstance());
 
-	Anim->TestSkill(Index);
+	Anim->Skill(Index);
 }
 
 void AAuroraAICharacter::Death()
 {
 	m_State = EAICharacterState::Death;
-
-	/*GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-
-	GetMesh()->SetCollisionProfileName(TEXT("Ragdoll"));
-
-	GetMesh()->SetSimulatePhysics(true);
-	GetMesh()->SetEnableGravity(true);*/
 
 	for (auto& Mtrl : m_MtrlArray)
 	{
@@ -271,26 +262,16 @@ void AAuroraAICharacter::Freeze()
 
 		ATerraCharacter* Terra = Cast<ATerraCharacter>(result.GetActor());
 
-		if (Terra->GetTerraType() == ETerraType::Default)
+		if (Terra->GetTerraType() == ETerraType::Gurad)
 		{
-			Terra->TakeDamage(10.f, DmgEvent, GetController(), this);
-		}
-
-		else
-		{
-
 			FVector	SocketLoc = GetMesh()->GetSocketLocation(TEXT("hand_l_Projectile"));
 
 			ADefaultEffect* Projectile = GetWorld()->SpawnActor<ADefaultEffect>(SocketLoc, GetActorRotation(), ActorParam);
 
 			Projectile->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonTerra/FX/Particles/Terra/Abilities/Shield/FX/P_Terra_ShieldBlockHit.P_Terra_ShieldBlockHit'"));
-
-			USoundBase* Sound = LoadObject<USoundBase>(nullptr, TEXT("/Script/Engine.SoundWave'/Game/KHH/Sound/Terra/AnyConv_com__swordEff0.AnyConv_com__swordEff0'"));
-
-			UGameplayStatics::PlaySoundAtLocation(this, Sound, GetActorLocation());
-
-			Terra->TakeDamage(10.f / 2.f, DmgEvent, GetController(), this);
 		}
+
+		Terra->TakeDamage(10.f, DmgEvent, GetController(), this);
 
 	}
 
@@ -316,32 +297,21 @@ void AAuroraAICharacter::Dash(UPrimitiveComponent* OverlappedComponent, AActor* 
 
 			if (!IsValid(Player))
 			{
-
 				return;
 			}
 
 			FDamageEvent DmgEvent;
 
-			if (Player->GetTerraType() == ETerraType::Default)
+			if (Player->GetTerraType() == ETerraType::Gurad)
 			{
-				Player->TakeDamage(10.f, DmgEvent, GetController(), this);
-			}
-
-			else
-			{
-
 				FVector	SocketLoc = GetMesh()->GetSocketLocation(TEXT("hand_l_Projectile"));
 
 				ADefaultEffect* Projectile = GetWorld()->SpawnActor<ADefaultEffect>(SocketLoc, GetActorRotation(), ActorParam);
 
 				Projectile->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonTerra/FX/Particles/Terra/Abilities/Shield/FX/P_Terra_ShieldBlockHit.P_Terra_ShieldBlockHit'"));
-
-				USoundBase* Sound = LoadObject<USoundBase>(nullptr, TEXT("/Script/Engine.SoundWave'/Game/KHH/Sound/Terra/AnyConv_com__swordEff0.AnyConv_com__swordEff0'"));
-
-				UGameplayStatics::PlaySoundAtLocation(this, Sound, GetActorLocation());
-
-				Player->TakeDamage(10.f / 2.f, DmgEvent, GetController(), this);
 			}
+
+			Player->TakeDamage(10.f, DmgEvent, GetController(), this);
 
 			UCharacterMovementComponent* Movement = Player->GetCharacterMovement();
 		}
@@ -379,26 +349,16 @@ void AAuroraAICharacter::Ultimate()
 
 		ATerraCharacter* Terra = Cast<ATerraCharacter>(result.GetActor());
 
-		if (Terra->GetTerraType() == ETerraType::Default)
+		if (Terra->GetTerraType() == ETerraType::Gurad)
 		{
-			Terra->TakeDamage(10.f, DmgEvent, GetController(), this);
-		}
-
-		else
-		{
-
 			FVector	SocketLoc = GetMesh()->GetSocketLocation(TEXT("hand_l_Projectile"));
 
 			ADefaultEffect* Projectile = GetWorld()->SpawnActor<ADefaultEffect>(SocketLoc, GetActorRotation(), ActorParam);
 
 			Projectile->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonTerra/FX/Particles/Terra/Abilities/Shield/FX/P_Terra_ShieldBlockHit.P_Terra_ShieldBlockHit'"));
-
-			USoundBase* Sound = LoadObject<USoundBase>(nullptr, TEXT("/Script/Engine.SoundWave'/Game/KHH/Sound/Terra/AnyConv_com__swordEff0.AnyConv_com__swordEff0'"));
-
-			UGameplayStatics::PlaySoundAtLocation(this, Sound, GetActorLocation());
-
-			Terra->TakeDamage(10.f / 2.f, DmgEvent, GetController(), this);
 		}
+
+		Terra->TakeDamage(10.f, DmgEvent, GetController(), this);
 
 	}
 

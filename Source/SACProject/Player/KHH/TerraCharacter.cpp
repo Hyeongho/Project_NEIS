@@ -90,6 +90,15 @@ float ATerraCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Damage
 {
 	float Damage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
+	if (m_TerraType == ETerraType::Gurad)
+	{
+		USoundBase* Sound = LoadObject<USoundBase>(nullptr, TEXT("/Script/Engine.SoundWave'/Game/KHH/Sound/Terra/AnyConv_com__swordEff0.AnyConv_com__swordEff0'"));
+
+		UGameplayStatics::PlaySoundAtLocation(this, Sound, GetActorLocation());
+
+		return Damage / 2;
+	}
+
 	return Damage;
 }
 

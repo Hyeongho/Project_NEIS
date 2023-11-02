@@ -70,11 +70,12 @@ void UAuroraAIAnimInstance::NativeBeginPlay()
 	PlayStart();
 }
 
-void UAuroraAIAnimInstance::TestSkill(int Index)
+void UAuroraAIAnimInstance::Skill(int Index)
 {
 	AAuroraAICharacter* Aurora = Cast<AAuroraAICharacter>(TryGetPawnOwner());
 
-	if (Montage_IsPlaying(m_SkillMontage[Index]) || !IsValid(Aurora) || Aurora->GetIsCool(Index) || !m_AttackEnable || m_AnimType == EAIAnimType::Attack)
+	if (Montage_IsPlaying(m_SkillMontage[Index]) || !IsValid(Aurora) || Aurora->GetIsCool(Index) 
+		|| !m_AttackEnable || m_AnimType == EAIAnimType::Attack)
 	{
 		return;
 	}
